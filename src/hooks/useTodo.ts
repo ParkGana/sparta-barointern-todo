@@ -1,4 +1,4 @@
-import { createTodo, fetchTodos, updateTodo } from '@/services/todoService';
+import { createTodo, deleteTodo, fetchTodos, updateTodo } from '@/services/todoService';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 export const useTodo = () => {
@@ -25,5 +25,13 @@ export const useTodo = () => {
     }
   });
 
-  return { fetchQuery, createMutation, updateMutation };
+  const deleteMutation = useMutation({
+    mutationFn: deleteTodo,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['todos'] });
+      fetchQuery.refetch();
+    }
+  });
+
+  return { fetchQuery, createMutation, updateMutation, deleteMutation };
 };

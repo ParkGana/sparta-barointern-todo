@@ -38,3 +38,14 @@ export const updateTodo = async ({ id, title, completed }: TodoType): Promise<vo
     throw new Error(e);
   }
 };
+
+/* Todo 삭제 */
+export const deleteTodo = async (id: string): Promise<void> => {
+  try {
+    await fetch(`http://localhost:4000/todos/${id}`, {
+      method: 'DELETE'
+    });
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};

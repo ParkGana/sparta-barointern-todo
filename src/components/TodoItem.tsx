@@ -12,7 +12,7 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({ data, filter, isUpdated, handleUpdated }: TodoItemProps) => {
-  const { updateMutation } = useTodo();
+  const { updateMutation, deleteMutation } = useTodo();
 
   const [updatedTitle, setUpdatedTitle] = useState<string>(data.title);
 
@@ -24,6 +24,10 @@ const TodoItem = ({ data, filter, isUpdated, handleUpdated }: TodoItemProps) => 
   const handleUpdateTodo = (completed: boolean) => {
     updateMutation.mutate({ id: data.id, title: updatedTitle, completed });
     handleUpdated(null);
+  };
+
+  const handleDeleteTodo = () => {
+    deleteMutation.mutate(data.id);
   };
 
   return (
@@ -58,7 +62,7 @@ const TodoItem = ({ data, filter, isUpdated, handleUpdated }: TodoItemProps) => 
               </p>
               <div className="flex gap-2 p-3">
                 <FaPenToSquare size={20} className="text-gray-700 cursor-pointer" onClick={handleChangeUpdated} />
-                <FaTrashCan size={20} className="text-gray-700 cursor-pointer" />
+                <FaTrashCan size={20} className="text-gray-700 cursor-pointer" onClick={handleDeleteTodo} />
               </div>
             </>
           )}
