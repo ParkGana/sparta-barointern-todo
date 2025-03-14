@@ -17,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${pretendard.variable} font-pretendard`}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <main className="max-w-3xl p-10 m-auto">{children}</main>
+        </Providers>
       </body>
     </html>
   );
