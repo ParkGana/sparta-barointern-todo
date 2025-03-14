@@ -12,3 +12,16 @@ export const fetchTodos = async (): Promise<TodoType[]> => {
     throw new Error(e);
   }
 };
+
+/* Todo 생성 */
+export const createTodo = async (title: string): Promise<void> => {
+  try {
+    await fetch('http://localhost:4000/todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, completed: false })
+    });
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};
