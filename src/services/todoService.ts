@@ -25,3 +25,16 @@ export const createTodo = async (title: string): Promise<void> => {
     throw new Error(e);
   }
 };
+
+/* Todo 수정 */
+export const updateTodo = async ({ id, title, completed }: TodoType): Promise<void> => {
+  try {
+    await fetch(`http://localhost:4000/todos/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, completed })
+    });
+  } catch (e: any) {
+    throw new Error(e);
+  }
+};

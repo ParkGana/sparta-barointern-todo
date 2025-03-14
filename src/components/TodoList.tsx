@@ -10,9 +10,14 @@ const TodoList = () => {
   } = useTodo();
 
   const [filter, setFilter] = useState<string>('all');
+  const [updatedItem, setUpdatedItem] = useState<string | null>(null);
 
   const handleChangeFilter = (value: string) => {
     setFilter(value);
+  };
+
+  const handleChangeUpdatedItem = (id: string | null) => {
+    setUpdatedItem(id);
   };
 
   return (
@@ -28,7 +33,13 @@ const TodoList = () => {
       />
       <div>
         {todos?.map((todo) => (
-          <TodoItem key={todo.id} data={todo} filter={filter} />
+          <TodoItem
+            key={todo.id}
+            data={todo}
+            filter={filter}
+            isUpdated={updatedItem === todo.id}
+            handleUpdated={handleChangeUpdatedItem}
+          />
         ))}
       </div>
     </div>
