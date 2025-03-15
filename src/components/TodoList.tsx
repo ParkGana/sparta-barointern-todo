@@ -3,10 +3,11 @@ import { useTodo } from '@/hooks/useTodo';
 import TodoFilter from './TodoFilter';
 import TodoItem from './TodoItem';
 import { useState } from 'react';
+import Error from './Error';
 
 const TodoList = () => {
   const {
-    fetchQuery: { data: todos }
+    fetchQuery: { data: todos, isError }
   } = useTodo();
 
   const [filter, setFilter] = useState<string>('all');
@@ -19,6 +20,8 @@ const TodoList = () => {
   const handleChangeUpdatedItem = (id: string | null) => {
     setUpdatedItem(id);
   };
+
+  if (isError) return <Error />;
 
   return (
     <div className="w-full flex flex-col gap-8">
