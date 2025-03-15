@@ -1,7 +1,9 @@
+const API_URL = 'https://rattle-childlike-porkpie.glitch.me/todos';
+
 /* Todo 목록 가져오기 */
 export const fetchTodos = async (): Promise<TodoType[]> => {
   try {
-    const res = await fetch('http://localhost:4000/todos', {
+    const res = await fetch(API_URL, {
       cache: 'no-store'
     });
 
@@ -16,7 +18,7 @@ export const fetchTodos = async (): Promise<TodoType[]> => {
 /* Todo 생성 */
 export const createTodo = async (title: string): Promise<void> => {
   try {
-    await fetch('http://localhost:4000/todos', {
+    await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, completed: false })
@@ -29,7 +31,7 @@ export const createTodo = async (title: string): Promise<void> => {
 /* Todo 수정 */
 export const updateTodo = async ({ id, title, completed }: TodoType): Promise<void> => {
   try {
-    await fetch(`http://localhost:4000/todos/${id}`, {
+    await fetch(`${API_URL}/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title, completed })
@@ -42,7 +44,7 @@ export const updateTodo = async ({ id, title, completed }: TodoType): Promise<vo
 /* Todo 삭제 */
 export const deleteTodo = async (id: string): Promise<void> => {
   try {
-    await fetch(`http://localhost:4000/todos/${id}`, {
+    await fetch(`${API_URL}/${id}`, {
       method: 'DELETE'
     });
   } catch (e: any) {
